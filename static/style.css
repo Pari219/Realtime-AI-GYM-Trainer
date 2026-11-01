@@ -179,3 +179,50 @@ div[role="menuitem"] {
   background-color: #181D2A !important;
   color: #fff;
 }
+
+
+/* Fix text visibility in login and other inputs */
+[data-testid="stTextInput"] input,
+[data-testid="stNumberInput"] input,
+[data-baseweb="input"] input,
+[data-baseweb="textarea"] textarea {
+    background-color: #181D2A !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    caret-color: #FFFFFF !important;
+    border: 1px solid #454B5B !important;
+}
+
+/* Make placeholder text visible */
+[data-testid="stTextInput"] input::placeholder,
+[data-baseweb="input"] input::placeholder {
+    color: #A7AFBF !important;
+    -webkit-text-fill-color: #A7AFBF !important;
+    opacity: 1 !important;
+}
+
+/* Keep input containers dark */
+[data-testid="stTextInput"] [data-baseweb="input"],
+[data-testid="stNumberInput"] [data-baseweb="input"] {
+    background-color: #181D2A !important;
+}
+
+
+/* Dark background for the Streamlit custom component area */
+[data-testid="stCustomComponentV1"] {
+    background-color: #0A0D14 !important;
+    border: 1px solid #303747 !important;
+}
+
+/* Keep the video area dark when no video is displayed */
+[data-testid="stVideo"],
+[data-testid="stCustomComponentV1"] video {
+    background-color: #0A0D14 !important;
+}
+
+/* Improve visibility of controls near the video */
+[data-testid="stCustomComponentV1"] button {
+    background-color: #181D2A !important;
+    color: #FFFFFF !important;
+    border: 1px solid #454B5B !important;
+}

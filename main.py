@@ -35,19 +35,41 @@ def main():
 
     initial_session_defaults()
 
-    if "voice_pipeline" not in st.session_state:
+    
+    if not st.session_state.get("voice_pipeline"):
         try:
             api_key = os.environ.get("GROQ_API_KEY", "")
 
-            if not api_key and hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets:
-                api_key = st.secrets["GROQ_API_KEY"]
-            
+            # Read the key from Streamlit secrets if not set in the environment.
+            if not api_key:
+                try:
+                    api_key = st.secrets.get("GROQ_API_KEY", "")
+                except Exception:
+                    api_key = ""
+
+            if not api_key:
+                raise ValueError(
+                    "GROQ_API_KEY is missing. Check "
+                    ".streamlit/secrets.toml."
+                )
+
             groq_client = Groq(api_key=api_key)
             llm_coach = LLMCoach(groq_client)
             tts = TextToSpeech()
-            st.session_state.voice_pipeline = VoicePipeline(llm_coach, tts)
+
+            st.session_state.voice_pipeline = VoicePipeline(
+                llm_coach, tts
+            )
+
         except Exception as e:
             st.session_state.voice_pipeline = None
+            st.error(f"Voice pipeline initialization failed: {e}")
+
+    if not st.session_state.get("voice_pipeline"):
+        st.warning(
+            "Voice coaching is unavailable. "
+            "Check your GROQ_API_KEY and voice dependencies."
+        )
 
     workout_started = st.session_state.get("workout_started", False)
     

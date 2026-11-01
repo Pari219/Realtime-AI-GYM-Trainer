@@ -36,7 +36,7 @@ def inject_local_font(front_path, front_name):
 
 
 def injected_webrtc_styles():
-    font_path = os.path.join(os.getcwd(), "static", "Adobeclean.otf")
+    font_path = os.path.join(os.getcwd(), "static", "AdobeClean.otf")
 
     if not os.path.exists(font_path):
         return
@@ -67,6 +67,18 @@ def injected_webrtc_styles():
                             font-weight: 100 900;
                             font-style: normal;
                         }}
+                        /* Style the WebRTC component background */
+                        html,
+                        body,
+                        #root {{
+                            background-color: #0A0D14 !important;
+                            color: #FFFFFF !important;
+                        }}
+
+                        /* Dark camera/video area */
+                        video {{
+                            background-color: #0A0D14 !important;
+                        }}
 
                         .MuiButtonBase-root,
                         .MuiButton-root,
@@ -75,6 +87,7 @@ def injected_webrtc_styles():
                             border-radius: 0 !important;
                             font-family: 'AdobeClean', sans-serif !important;
                             letter-spacing: 0.05em !important;
+                            color: #FFFFFF !important;
                         }}
                     `;
 

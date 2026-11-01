@@ -8,6 +8,11 @@ credentials/
 *.pem
 *.key
 
+.streamlit/secrets.toml
+.env
+.env.*
+!.env.example
+
 # Python virtual environments
 .venv/
 venv/
